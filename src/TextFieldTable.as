@@ -14,7 +14,7 @@ package {
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ this.dataSource = dataSource };
 		
-		private var columnPropertyNames:Vector.<String>;
+		private var columnPropertyNames:Vector.<String> = new Vector.<String>();
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
 		
 		private var visibleRange:Rectangle;
