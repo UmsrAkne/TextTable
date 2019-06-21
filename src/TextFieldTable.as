@@ -20,6 +20,7 @@ package {
 					addChild(tFld);
 					newRow.push(tFld);
 				}
+				textFields.push(newRow)
 			}
 		}
 	}
