@@ -10,6 +10,9 @@ package {
 		private var textFields:Vector.<Vector.<TextField>> = new Vector.<Vector.<TextField>>;
 		public function get TextFields():Vector.<Vector.<TextField>> { return textFields };
 		
+		private var dataSource:Array
+		public function set DataSource(dataSource:Array):void{ this.dataSource = dataSource };
+		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
 				var newRow:Vector.<TextField> = new Vector.<TextField>;
