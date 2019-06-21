@@ -1,5 +1,6 @@
 package {
 	import flash.display.Sprite;
+	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	/**
 	 * ...
@@ -16,6 +17,8 @@ package {
 		private var columnPropertyNames:Vector.<String>;
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
 		
+		private var visibleRange:Rectangle;
+		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
 				var newRow:Vector.<TextField> = new Vector.<TextField>;
@@ -28,6 +31,8 @@ package {
 				}
 				textFields.push(newRow)
 			}
+			
+			visibleRange = new Rectangle(0, 0, initialColumnCount , initialRowCount);
 		}
 		
 		/** 
