@@ -13,6 +13,9 @@ package {
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ this.dataSource = dataSource };
 		
+		private var columnPropertyNames:Vector.<String>;
+		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
+		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
 				var newRow:Vector.<TextField> = new Vector.<TextField>;
