@@ -47,6 +47,33 @@ package {
 				txFldRowCount++;
 			}
 		}
+				
+		/**
+		 * 表を下へスクロールします。
+		 */
+		public function scrollDown():void{
+			var moveDistance:int = 4;
+			if (visibleRange.y + visibleRange.height + moveDistance >= dataSource.length -1)
+			{
+				visibleRange.y = dataSource.length - visibleRange.height;
+				writeVisibleRange();
+				return;
+			}
+			visibleRange.y += moveDistance;
+			writeVisibleRange();
+		}
+		
+		public function scrollUp():void{
+			var moveDistance:int = 4
+			if (visibleRange.y - moveDistance < 0) {
+				visibleRange.y = 0;
+				writeVisibleRange();
+				return;
+			}
+			visibleRange.y -= moveDistance;
+			writeVisibleRange();
+		}
+		
 		/** 
 		 * 関数オブジェクトを表内の全テキストフィールドに対して実行します。
 		 * @param	callBackFunc	関数オブジェクトの仕様は　callBack(t:TextField)　です
