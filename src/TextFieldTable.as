@@ -12,7 +12,10 @@ package {
 		public function get TextFields():Vector.<Vector.<TextField>> { return textFields };
 		
 		private var dataSource:Array
-		public function set DataSource(dataSource:Array):void{ this.dataSource = dataSource };
+		public function set DataSource(dataSource:Array):void{ 
+			this.dataSource = dataSource;
+			writeVisibleRange();
+		};
 		
 		private var columnPropertyNames:Vector.<String> = new Vector.<String>();
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
