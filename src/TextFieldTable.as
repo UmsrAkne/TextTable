@@ -8,6 +8,7 @@ package {
 	public class TextFieldTable extends Sprite{
 		
 		private var textFields:Vector.<Vector.<TextField>> = new Vector.<Vector.<TextField>>;
+		public function get TextFields():Vector.<Vector.<TextField>> { return textFields };
 		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
