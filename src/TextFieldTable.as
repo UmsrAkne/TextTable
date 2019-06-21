@@ -23,5 +23,17 @@ package {
 				textFields.push(newRow)
 			}
 		}
+		
+		/** 
+		 * 関数オブジェクトを表内の全テキストフィールドに対して実行します。
+		 * @param	callBackFunc	関数オブジェクトの仕様は　callBack(t:TextField)　です
+		 */
+		public function applyToAll(callBackFunc:Function){
+			for (var i:int = 0; i < textFields.length; i++){
+				for (var j:int = 0; j < textFields[i].length; j++){
+					callBackFunc( textFields[i][j] );
+				}
+			}
+		}
 	}
 }
