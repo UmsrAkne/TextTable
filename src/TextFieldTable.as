@@ -35,6 +35,15 @@ package {
 			visibleRange = new Rectangle(0, 0, initialColumnCount , initialRowCount);
 		}
 		
+		private function writeVisibleRange():void{
+			var txFldRowCount:int = 0;
+			for (var i:int = visibleRange.y; i < visibleRange.height + visibleRange.y; i++){
+				for (var j:int = 0; j < columnPropertyNames.length; j++){
+					textFields[ txFldRowCount ][j].text = dataSource[i][columnPropertyNames[j]];
+				}
+				txFldRowCount++;
+			}
+		}
 		/** 
 		 * 関数オブジェクトを表内の全テキストフィールドに対して実行します。
 		 * @param	callBackFunc	関数オブジェクトの仕様は　callBack(t:TextField)　です
