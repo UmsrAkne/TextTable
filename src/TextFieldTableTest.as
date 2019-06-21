@@ -1,10 +1,11 @@
 package {
+	import flash.display.Sprite;
 	import flash.text.TextField;
 	/**
 	 * ...
 	 * @author 
 	 */
-	public final class TextFieldTableTest {
+	public final class TextFieldTableTest extends Sprite {
 		
 		public function TextFieldTableTest() {
 			applyToAllTest();
