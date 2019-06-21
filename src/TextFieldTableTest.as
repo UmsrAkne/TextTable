@@ -14,7 +14,7 @@ package {
 		private function applyToAllTest():void{
 			var table:TextFieldTable = new TextFieldTable(10, 10);
 			
-			function addTestText(t:TextField){ t.appendText("tst"); }
+			function addTestText(t:TextField):void{ t.appendText("tst"); }
 			table.applyToAll(addTestText);
 			
 			isEqual(table.TextFields[0][0].text , "tst");
