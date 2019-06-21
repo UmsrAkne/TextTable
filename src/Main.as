@@ -8,6 +8,8 @@ package{
 	public class Main extends Sprite {
 		
 		public function Main() {
+			var textFieldTable:TextFieldTable = new TextFieldTable();
+			addChild(textFieldTable);
 		}
 		
 	}	
