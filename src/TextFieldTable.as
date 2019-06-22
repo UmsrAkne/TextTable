@@ -52,11 +52,7 @@ package {
 			}
 		}
 				
-		/**
-		 * 表を下へスクロールします。
-		 */
-		public function scrollDown():void{
-			var moveDistance:int = 4;
+		public function scrollDown(moveDistance:uint):void{
 			if (visibleRange.y + visibleRange.height + moveDistance >= dataSource.length -1)
 			{
 				visibleRange.y = dataSource.length - visibleRange.height;
@@ -67,8 +63,7 @@ package {
 			writeVisibleRange();
 		}
 		
-		public function scrollUp():void{
-			var moveDistance:int = 4
+		public function scrollUp(moveDistance:uint):void{
 			if (visibleRange.y - moveDistance < 0) {
 				visibleRange.y = 0;
 				writeVisibleRange();
