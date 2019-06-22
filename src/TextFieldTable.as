@@ -46,7 +46,10 @@ package {
 			var txFldRowCount:int = 0;
 			for (var i:int = visibleRange.y; i < visibleRange.height + visibleRange.y; i++){
 				for (var j:int = 0; j < columnPropertyNames.length; j++){
-					textFields[ txFldRowCount ][j].text = dataSource[i][columnPropertyNames[j]];
+					var currentTextField:TextFieldForTable = textFields[ txFldRowCount ][j];
+					currentTextField.text = dataSource[i][columnPropertyNames[j]];
+					currentTextField.PointOfShowingValue.x = j;
+					currentTextField.PointOfShowingValue.y = i;
 				}
 				txFldRowCount++;
 			}
