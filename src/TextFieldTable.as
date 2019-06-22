@@ -22,6 +22,10 @@ package {
 		
 		private var visibleRange:Rectangle;
 		
+		public function getValue(rowIndex:int , columnIndex:int):String{
+			return String(dataSource[rowIndex][columnPropertyNames[columnIndex]]);
+		}
+		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
 				var newRow:Vector.<TextField> = new Vector.<TextField>;
