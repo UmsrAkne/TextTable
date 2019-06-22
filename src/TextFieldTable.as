@@ -18,6 +18,16 @@ package {
 		};
 		
 		private var columnPropertyNames:Vector.<String> = new Vector.<String>();
+		
+		/**
+		 * このプロパティにテキストのベクターをセットすると、文字列が示すプロパティをデータソース内のオブジェクトから参照し、値がカラムに書き込まれます。
+		 * 使用例: このプロパティに [ "x","y","visible" ]　をセット
+		 * 仮にデータソース内のオブジェクトが Sprite ならば、描画される表には
+		 * 
+		 * Sprite.xの値  Sprite.yの値  Sprite.visibleの値
+		 * 
+		 * というように値が入力されて表示される。
+		 */
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
 		
 		private var visibleRange:Rectangle;
