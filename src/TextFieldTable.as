@@ -8,8 +8,8 @@ package {
 	 */
 	public class TextFieldTable extends Sprite{
 		
-		private var textFields:Vector.<Vector.<TextField>> = new Vector.<Vector.<TextField>>;
-		public function get TextFields():Vector.<Vector.<TextField>> { return textFields };
+		private var textFields:Vector.<Vector.<TextFieldForTable>> = new Vector.<Vector.<TextFieldForTable>>;
+		public function get TextFields():Vector.<Vector.<TextFieldForTable>> { return textFields };
 		
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ 
@@ -28,9 +28,9 @@ package {
 		
 		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
 			for (var i:int = 0; i < initialRowCount; i++){
-				var newRow:Vector.<TextField> = new Vector.<TextField>;
+				var newRow:Vector.<TextFieldForTable> = new Vector.<TextFieldForTable>;
 				for (var j:int = 0; j < initialColumnCount; j++){
-					var tFld:TextField = new TextField();
+					var tFld:TextFieldForTable = new TextFieldForTable();
 					tFld.x = j * 20;
 					tFld.y = i * 20;
 					addChild(tFld);
