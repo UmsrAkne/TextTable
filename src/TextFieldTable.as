@@ -41,23 +41,44 @@ package {
 			return String(dataSource[rowIndex][columnPropertyNames[columnIndex]]);
 		}
 		
-		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int) {
+		/**
+		 * 
+		 * @param	initialRowCount		初期状態での表の行数を指定します。
+		 * @param	initialColumnCount	初期状態での列の行数を指定します。
+		 * @param	defaultCellSample	初期状態で生成される表を構成するマス（テキストフィールド）のサンプルを指定します。
+		 * 			初期状態の全てのマスが、ここで指定されたテキストフィールドの情報をコピーします。
+		 */
+		public function TextFieldTable(initialRowCount:int ,initialColumnCount:int ,defaultCellSample:TextField = null) {
 			for (var i:int = 0; i < initialRowCount; i++){
 				var newRow:Vector.<TextFieldForTable> = new Vector.<TextFieldForTable>;
 				for (var j:int = 0; j < initialColumnCount; j++){
 					var tFld:TextFieldForTable = new TextFieldForTable();
+					if (defaultCellSample != null){
+						tFld.defaultTextFormat = defaultCellSample.defaultTextFormat;
+						tFld.width = defaultCellSample.width;
+						tFld.height = defaultCellSample.height;
+						tFld.text = defaultCellSample.text;
+						tFld.multiline = defaultCellSample.multiline;
+						tFld.border = defaultCellSample.border;
+						tFld.background = defaultCellSample.background;
+					}
+					else{
+						tFld.multiline = false;
+						tFld.border = true;
+						tFld.width = 40;
+						tFld.height = 30;
+					}
+					
+					tFld.x = j * tFld.width;
+					tFld.y = i * tFld.height;
+					tFld.type = TextFieldType.INPUT;
 					tFld.addEventListener(FocusEvent.FOCUS_OUT , focusOuted);
 					tFld.addEventListener(FocusEvent.FOCUS_IN , focusEntered);
-					tFld.multiline = false;
-					tFld.type = TextFieldType.INPUT;
-					tFld.x = j * 20;
-					tFld.y = i * 20;
 					addChild(tFld);
 					newRow.push(tFld);
 				}
-				textFields.push(newRow)
+				textFields.push(newRow);
 			}
-			
 			visibleRange = new Rectangle(0, 0, initialColumnCount , initialRowCount);
 		}
 		
