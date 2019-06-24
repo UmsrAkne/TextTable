@@ -35,6 +35,8 @@ package {
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
 		
 		private var visibleRange:Rectangle;
+		public function get VisibleRange():Rectangle { return visibleRange };
+		
 		private var editingString:String = "";
 		
 		public function getValue(rowIndex:int , columnIndex:int):String{
