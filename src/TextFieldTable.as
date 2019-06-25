@@ -56,13 +56,7 @@ package {
 				for (var j:int = 0; j < initialColumnCount; j++){
 					var tFld:TextFieldForTable = new TextFieldForTable();
 					if (defaultCellSample != null){
-						tFld.defaultTextFormat = defaultCellSample.defaultTextFormat;
-						tFld.width = defaultCellSample.width;
-						tFld.height = defaultCellSample.height;
-						tFld.text = defaultCellSample.text;
-						tFld.multiline = defaultCellSample.multiline;
-						tFld.border = defaultCellSample.border;
-						tFld.background = defaultCellSample.background;
+						tFld.copyProperties(defaultCellSample);
 					}
 					else{
 						tFld.multiline = false;

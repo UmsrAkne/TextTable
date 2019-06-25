@@ -18,6 +18,21 @@ package {
 			super();
 		}
 		
+		/**
+		 * 引数に取ったテキストフィールドのプロパティを、このオブジェクトのプロパティにコピーします。
+		 * @param	baseTextField コピーする情報をセットしたオブジェクトです。
+		 */
+		public function copyProperties(baseTextField:TextField):void{
+			this.defaultTextFormat = baseTextField.defaultTextFormat;
+			this.width = baseTextField.width;
+			this.height = baseTextField.height;
+			this.text = baseTextField.text;
+			this.multiline = baseTextField.multiline;
+			this.border = baseTextField.border;
+			this.background = baseTextField.background;
+			this.x = baseTextField.x;
+			this.y = baseTextField.y;
+		}
 	}
 
 }
