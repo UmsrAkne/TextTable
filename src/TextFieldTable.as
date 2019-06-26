@@ -118,6 +118,11 @@ package {
 					currentTextField.text = dataSource[i][columnPropertyNames[j]];
 					currentTextField.PointOfShowingValue.x = j;
 					currentTextField.PointOfShowingValue.y = i;
+					
+					//イベントは内部のテキストフィールドから送付する（ターゲットが読み取り専用なのでここでセットできない）
+					var textWritingEvent:TextWriting = new TextWriting(TextWriting.TEXT_WRITING,true);
+					textWritingEvent.originalValue = dataSource[i][columnPropertyNames[j]];
+					currentTextField.dispatchEvent(textWritingEvent);
 				}
 				txFldRowCount++;
 			}
