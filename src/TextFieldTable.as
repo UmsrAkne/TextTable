@@ -108,12 +108,6 @@ package {
 			else if (dataSource[pointOnDataSource.y][propertyName] is String){
 				dataSource[pointOnDataSource.y][ propertyName ] = txFld.text;
 			}
-			
-			for each(var sp:Sprite in dataSource){
-				trace(sp.x , sp.y , sp.visible);
-			}
-			
-			trace("---------");
 		}
 		
 		private function writeVisibleRange():void{
