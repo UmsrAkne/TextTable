@@ -1,5 +1,6 @@
 package {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
@@ -12,11 +13,47 @@ package {
 	 */
 	public final class TextFieldTableTest extends Sprite {
 		
+		private var assertionCount:int = 0;
+		
 		public function TextFieldTableTest() {
 			applyToAllTest();
 			dataSourceTest();
 			scrollUpAndDownTest();
-			trace("Testを実行しました");
+			
+			//テーブルから文字列の書き込みイベントがディスパッチされるかテスト
+			textFieldTableEventDispatchTest();
+			
+			trace(assertionCount + " 回の比較テストが実行されました");
+		}
+		
+		private function textFieldTableEventDispatchTest():void {
+			var table:TextFieldTable = new TextFieldTable(10, 10);
+			var sprites:Array = new Array();
+			for (var i:int = 0; i < 40; i++){
+				var sp:Sprite = new Sprite();
+				sp.x = i;
+				sprites.push(sp);
+			}
+			
+			var j:int = 0;
+			var countDownCounter:int = 0;
+			for (var k:int = 0; k < 10; k++){ countDownCounter += k; }
+			
+			function textWriting(e:Event):void { 
+				var textWritingEvent:TextWriting = TextWriting(e);
+				isEqual(j , textWritingEvent.target.text);
+				countDownCounter -= textWritingEvent.originalValue;
+				j++;
+			}
+			
+			
+			table.addEventListener(TextWriting.TEXT_WRITING, textWriting);
+			table.ColumnPropertyNames = new < String > ["x"];
+			
+			//データソースをセットすると、文字列が表に書き込まれ、イベントが発行される。
+			table.DataSource = sprites;
+			
+			isEqual(countDownCounter , 0);
 		}
 		
 		private function scrollUpAndDownTest():void {
@@ -115,6 +152,7 @@ package {
 		
 		private function isEqual(a:* , b:*):void{
 			if (a != b) throw new Error("比較した値が異なります。")
+			assertionCount++;
 		}
 		
 	}
