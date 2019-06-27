@@ -96,6 +96,14 @@ package {
 			var pointOnDataSource:Point = txFld.PointOfShowingValue;
 			var propertyName:String = columnPropertyNames[pointOnDataSource.x];
 			
+			var valueSettingEvent:TextWriting = new TextWriting(TextWriting.VALUE_SETTING, true);
+			txFld.dispatchEvent(valueSettingEvent);
+			
+			if (valueSettingEvent.UserSetted){
+				dataSource[pointOnDataSource.y][ propertyName ] = valueSettingEvent.SettingValue;
+				return
+			}
+			
 			// 実装方法が泥臭い。が、必要な機能をカバー可能なのでこれでいく。
 			// 先にデータソース側のプロパティの型をチェック。
 			// 以下のような型ならテキストフィールドの内容を型変換して入力する。
