@@ -28,6 +28,7 @@ package {
 		
 		/**
 		 * このプロパティにテキストのベクターをセットすると、文字列が示すプロパティをデータソース内のオブジェクトから参照し、値がカラムに書き込まれます。
+		 * また、ヘッダー行にもベクター内の文字列がセットされ、表示されます。
 		 * 使用例: このプロパティに [ "x","y","visible" ]　をセット
 		 * 仮にデータソース内のオブジェクトが Sprite ならば、描画される表には
 		 * 
@@ -35,7 +36,12 @@ package {
 		 * 
 		 * というように値が入力されて表示される。
 		 */
-		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
+		public function set ColumnPropertyNames(names:Vector.<String>):void{ 
+			for (var i:int = 0; i < names.length; i++){
+				headerRowTextFields[i].text = names[i];
+			}
+			columnPropertyNames = names 
+		};
 		
 		private var visibleRange:Rectangle;
 		public function get VisibleRange():Rectangle { return visibleRange };
