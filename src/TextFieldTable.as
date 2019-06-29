@@ -96,7 +96,7 @@ package {
 			var pointOnDataSource:Point = txFld.PointOfShowingValue;
 			var propertyName:String = columnPropertyNames[pointOnDataSource.x];
 			
-			var valueSettingEvent:TextWriting = new TextWriting(TextWriting.VALUE_SETTING, true);
+			var valueSettingEvent:TextTableEvent = new TextTableEvent(TextTableEvent.SOURCE_VALUE_SETTING, true);
 			txFld.dispatchEvent(valueSettingEvent);
 			
 			if (valueSettingEvent.UserSetted){
@@ -128,7 +128,7 @@ package {
 					currentTextField.PointOfShowingValue.y = i;
 					
 					//イベントは内部のテキストフィールドから送付する（ターゲットが読み取り専用なのでここでセットできない）
-					var textWritingEvent:TextWriting = new TextWriting(TextWriting.TEXT_WRITING,true);
+					var textWritingEvent:TextTableEvent = new TextTableEvent(TextTableEvent.CELL_TEXT_WRITING,true);
 					textWritingEvent.originalValue = dataSource[i][columnPropertyNames[j]];
 					currentTextField.dispatchEvent(textWritingEvent);
 				}

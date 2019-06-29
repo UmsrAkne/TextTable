@@ -40,14 +40,14 @@ package {
 			for (var k:int = 0; k < 10; k++){ countDownCounter += k; }
 			
 			function textWriting(e:Event):void { 
-				var textWritingEvent:TextWriting = TextWriting(e);
+				var textWritingEvent:TextTableEvent = TextTableEvent(e);
 				isEqual(j , textWritingEvent.target.text);
 				countDownCounter -= textWritingEvent.originalValue;
 				j++;
 			}
 			
 			
-			table.addEventListener(TextWriting.TEXT_WRITING, textWriting);
+			table.addEventListener(TextTableEvent.CELL_TEXT_WRITING, textWriting);
 			table.ColumnPropertyNames = new < String > ["x"];
 			
 			//データソースをセットすると、文字列が表に書き込まれ、イベントが発行される。
