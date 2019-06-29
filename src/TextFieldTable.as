@@ -15,6 +15,9 @@ package {
 		private var textFields:Vector.<Vector.<TextFieldForTable>> = new Vector.<Vector.<TextFieldForTable>>;
 		public function get TextFields():Vector.<Vector.<TextFieldForTable>> { return textFields };
 		
+		private var headerRowTextFields:Vector.<TextFieldForTable> = new Vector.<TextFieldForTable>;
+		public function get HeaderRowTextFields():Vector.<TextFieldForTable> { return headerRowTextFields };
+		
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ 
 			this.dataSource = dataSource;
@@ -25,6 +28,7 @@ package {
 		
 		/**
 		 * このプロパティにテキストのベクターをセットすると、文字列が示すプロパティをデータソース内のオブジェクトから参照し、値がカラムに書き込まれます。
+		 * また、ヘッダー行にもベクター内の文字列がセットされ、表示されます。
 		 * 使用例: このプロパティに [ "x","y","visible" ]　をセット
 		 * 仮にデータソース内のオブジェクトが Sprite ならば、描画される表には
 		 * 
@@ -32,7 +36,12 @@ package {
 		 * 
 		 * というように値が入力されて表示される。
 		 */
-		public function set ColumnPropertyNames(names:Vector.<String>):void{ columnPropertyNames = names };
+		public function set ColumnPropertyNames(names:Vector.<String>):void{ 
+			for (var i:int = 0; i < names.length; i++){
+				headerRowTextFields[i].text = names[i];
+			}
+			columnPropertyNames = names 
+		};
 		
 		private var visibleRange:Rectangle;
 		public function get VisibleRange():Rectangle { return visibleRange };
@@ -76,6 +85,24 @@ package {
 				textFields.push(newRow);
 			}
 			visibleRange = new Rectangle(0, 0, initialColumnCount , initialRowCount);
+			addHeaderRow();
+		}
+		
+		private function addHeaderRow():void{
+			function textFieldsDown(t:TextField):void{ t.y += t.height }
+			applyToAll( textFieldsDown );
+			
+			var sampleTextField:TextField = TextField(textFields[0][0]); //　一番左上のマスをサンプルとして一個取得。
+			
+			for (var i:int = 0; i < visibleRange.width; i++){
+				var tfld:TextFieldForTable = new TextFieldForTable();
+				tfld.copyProperties(sampleTextField);
+				tfld.x = i * tfld.width;
+				tfld.y = 0;
+				tfld.selectable = false; 　//選択可能である必要はない
+				headerRowTextFields.push(tfld);
+				addChild(tfld);
+			}
 		}
 		
 		private function focusEntered(e:FocusEvent):void {
