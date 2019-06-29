@@ -15,6 +15,9 @@ package {
 		private var textFields:Vector.<Vector.<TextFieldForTable>> = new Vector.<Vector.<TextFieldForTable>>;
 		public function get TextFields():Vector.<Vector.<TextFieldForTable>> { return textFields };
 		
+		private var headerRowTextFields:Vector.<TextFieldForTable> = new Vector.<TextFieldForTable>;
+		public function get HeaderRowTextFields():Vector.<TextFieldForTable> { return headerRowTextFields };
+		
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ 
 			this.dataSource = dataSource;
