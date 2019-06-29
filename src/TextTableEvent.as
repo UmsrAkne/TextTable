@@ -15,6 +15,7 @@ package {
 		 */
 		public static const SOURCE_VALUE_SETTING:String = "SourceValueSetting";
 		
+		/** テキストフィールドに文字列として書き込みされる前のデータソースの値です。 */
 		public var originalValue:*;
 		
 		private var settingValue:*;
@@ -24,9 +25,7 @@ package {
 		}
 		public function get SettingValue():*{ return settingValue }
 		
-		
-		/** SettingValue の値に対して、ユーザーが代入を行ったかどうかを示します。
-		 */
+		/** SettingValue の値に対して、ユーザーが代入を行ったかどうかを示します。*/
 		public function get UserSetted():Boolean { return userSetted };
 		private var userSetted:Boolean = false;
 		
