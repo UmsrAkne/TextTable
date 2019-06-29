@@ -79,6 +79,24 @@ package {
 				textFields.push(newRow);
 			}
 			visibleRange = new Rectangle(0, 0, initialColumnCount , initialRowCount);
+			addHeaderRow();
+		}
+		
+		private function addHeaderRow():void{
+			function textFieldsDown(t:TextField):void{ t.y += t.height }
+			applyToAll( textFieldsDown );
+			
+			var sampleTextField:TextField = TextField(textFields[0][0]); //　一番左上のマスをサンプルとして一個取得。
+			
+			for (var i:int = 0; i < visibleRange.width; i++){
+				var tfld:TextFieldForTable = new TextFieldForTable();
+				tfld.copyProperties(sampleTextField);
+				tfld.x = i * tfld.width;
+				tfld.y = 0;
+				tfld.selectable = false; 　//選択可能である必要はない
+				headerRowTextFields.push(tfld);
+				addChild(tfld);
+			}
 		}
 		
 		private function focusEntered(e:FocusEvent):void {
