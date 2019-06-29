@@ -120,7 +120,6 @@ package {
 		
 		private function dataSourceTest():void {
 			var table:TextFieldTable = new TextFieldTable(10, 10);
-			this.addChild(table);
 			var vec:Array = new Array();
 			for (var i:int = 0; i < 40; i++){
 				var sp:Sprite = new Sprite();
@@ -137,7 +136,6 @@ package {
 			//正常にセッティングできていればこの値がデータソース（表）に入っている。
 			isEqual(table.getValue(0, 0), 0);
 			isEqual(table.getValue(1, 3), "false");
-			removeChild(table);
 		}
 		
 		private function applyToAllTest():void{
