@@ -39,15 +39,6 @@ package {
 			t.x = x;
 			t.width = width;
 			textFields.push(t);
-		}
-		
-		/**	この列に属する全てのテキストフィールドに対して、引数に入力したコールバックを実行します。
-		 * @param	callBackFunction	関数の仕様は　callBackFunction(t:TextFieldForTable) です。
-		 */
-		public function applyToAll( callBackFunction:Function ):void{
-			for each( var t:TextFieldForTable in textFields ){
-				callBackFunction(t:TextFieldForTable);
-			}
-		}
+		}		
 	}
 }
