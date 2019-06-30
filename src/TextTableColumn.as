@@ -11,6 +11,11 @@ package {
 				t.x = posX;
 				this.x = posX
 			}
+			
+			//列の位置が変更されたら、隣の列が存在るなら、その位置も変更する。
+			if (referenceToNextColumn){
+				referenceToNextColumn.X = this.x + this.width;
+			}
 		}
 		
 		private var width:int = 0;
@@ -19,6 +24,11 @@ package {
 			for each(var t:TextFieldForTable in textFields) { 
 				t.width = w ;
 				this.width = w;
+			}
+			
+			//次の列への参照は保持しているでの、この列の幅変更に、全列の位置が追従する。
+			if (referenceToNextColumn){
+				referenceToNextColumn.X = this.x + this.width;
 			}
 		}
 		
