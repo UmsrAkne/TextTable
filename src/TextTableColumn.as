@@ -22,6 +22,16 @@ package {
 			}
 		}
 		
+		private var referenceToNextColumn:TextTableColumn;
+		
+		/**
+		 * この列の右側の列への参照です。
+		 */
+		public function get ReferenceToNextColumn():TextTableColumn { return referenceToNextColumn; }
+		public function set ReferenceToNextColumn(nextColumn:TextTableColumn):void{
+			referenceToNextColumn = nextColumn;
+		}
+		
 		/** この列に属するセル群が数値専用のセルであるかどうかを表します。 */
 		public var isNumericOnly:Boolean = false;
 		
