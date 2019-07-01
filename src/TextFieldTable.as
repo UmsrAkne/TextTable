@@ -48,6 +48,7 @@ package {
 		public function get VisibleRange():Rectangle { return visibleRange };
 		
 		private var editingString:String = "";
+		private var focusingTextField:TextFieldForTable;
 		
 		public function getValue(rowIndex:int , columnIndex:int):String{
 			return String(dataSource[rowIndex][columnPropertyNames[columnIndex]]);
