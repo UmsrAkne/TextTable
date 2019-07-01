@@ -20,11 +20,36 @@ package {
 			dataSourceTest();
 			scrollUpAndDownTest();
 			textFieldColumnTest();
-			
+			テーブルにデータソースと列名をセットするときに順番が左右しても書き込まれるかテスト();
+			 
 			//テーブルから文字列の書き込みイベントがディスパッチされるかテスト
 			textFieldTableEventDispatchTest();
 			
 			trace(assertionCount + " 回の比較テストが実行されました");
+		}
+		
+		private function テーブルにデータソースと列名をセットするときに順番が左右しても書き込まれるかテスト():void{
+			var sprites:Array = new Array();
+			for (var i:int = 0; i < 40; i++){
+				var sp:Sprite = new Sprite();
+				sp.x = i;
+				sprites.push(sp);
+			}
+			
+			
+			/** ColumnPropertyNames , DataSource　のセットの順番が変わったとしてもエラーにならず
+			 * 	期待されるテキストが書き込まれているか？
+			 */
+			
+			var table:TextFieldTable = new TextFieldTable(10, 10);
+			table.ColumnPropertyNames = new < String > ["x", "y", "z"];
+			table.DataSource = sprites;
+			isEqual(table.TextFields[0][0].text , "0");
+			
+			var table2:TextFieldTable = new TextFieldTable(10, 10);
+			table2.DataSource = sprites;
+			table2.ColumnPropertyNames = new < String > ["x", "y", "z"];
+			isEqual(table2.TextFields[0][0].text , "0");
 		}
 		
 		private function textFieldColumnTest():void {

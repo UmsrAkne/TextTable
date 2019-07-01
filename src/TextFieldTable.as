@@ -37,7 +37,9 @@ package {
 			for (var i:int = 0; i < names.length; i++){
 				columns[i].headerTextField.text = names[i];
 			}
-			columnPropertyNames = names 
+			columnPropertyNames = names;
+			
+			if (dataSource) writeVisibleRange();
 		}
 		
 		public var columns:Vector.<TextTableColumn> = new Vector.<TextTableColumn>;
