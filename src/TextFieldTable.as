@@ -15,9 +15,6 @@ package {
 		private var textFields:Vector.<Vector.<TextFieldForTable>> = new Vector.<Vector.<TextFieldForTable>>;
 		public function get TextFields():Vector.<Vector.<TextFieldForTable>> { return textFields };
 		
-		private var headerRowTextFields:Vector.<TextFieldForTable> = new Vector.<TextFieldForTable>;
-		public function get HeaderRowTextFields():Vector.<TextFieldForTable> { return headerRowTextFields };
-		
 		private var dataSource:Array
 		public function set DataSource(dataSource:Array):void{ 
 			this.dataSource = dataSource;
@@ -38,7 +35,7 @@ package {
 		 */
 		public function set ColumnPropertyNames(names:Vector.<String>):void{ 
 			for (var i:int = 0; i < names.length; i++){
-				headerRowTextFields[i].text = names[i];
+				columns[i].headerTextField.text = names[i];
 			}
 			columnPropertyNames = names 
 		}
@@ -113,7 +110,7 @@ package {
 				tfld.x = i * tfld.width;
 				tfld.y = 0;
 				tfld.selectable = false; 　//選択可能である必要はない
-				headerRowTextFields.push(tfld);
+				columns[i].headerTextField = tfld;
 				addChild(tfld);
 			}
 		}

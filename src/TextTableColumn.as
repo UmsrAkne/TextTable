@@ -32,6 +32,9 @@ package {
 			}
 		}
 		
+		/** この列のヘッダーセルへの参照です。 */
+		public var headerTextField:TextFieldForTable;
+		
 		private var referenceToNextColumn:TextTableColumn;
 		
 		/**
