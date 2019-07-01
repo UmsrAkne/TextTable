@@ -53,7 +53,16 @@ package {
 			isEqual(table.columns[7].X , 440);
 			isEqual(table.columns[8].X , 480);
 			isEqual(table.columns[9].X , 520);
-
+			
+			isEqual(table.columns[1].headerTextField.x , 40);	//	ヘッダーセルの位置情報も全く同じになっているはず。
+			isEqual(table.columns[2].headerTextField.x , 240);
+			isEqual(table.columns[3].headerTextField.x , 280);
+			isEqual(table.columns[4].headerTextField.x , 320);
+			isEqual(table.columns[5].headerTextField.x , 360);
+			isEqual(table.columns[6].headerTextField.x , 400);
+			isEqual(table.columns[7].headerTextField.x , 440);
+			isEqual(table.columns[8].headerTextField.x , 480);
+			isEqual(table.columns[9].headerTextField.x , 520);
 		}
 		
 		private function textFieldTableEventDispatchTest():void {
