@@ -127,6 +127,7 @@ package {
 			* 	そのため、フォーカスインとフォーカスアウトを入力確定として扱う。
 			*/
 			editingString = e.target.text;
+			focusingTextField = TextFieldForTable(e.target);
 		}
 		
 		private function focusOuted(e:FocusEvent):void {
@@ -158,6 +159,8 @@ package {
 			else if (dataSource[pointOnDataSource.y][propertyName] is String){
 				dataSource[pointOnDataSource.y][ propertyName ] = txFld.text;
 			}
+			
+			focusingTextField = null;
 		}
 		
 		private function writeVisibleRange():void{
@@ -197,6 +200,15 @@ package {
 			}
 			visibleRange.y -= moveDistance;
 			writeVisibleRange();
+		}
+		
+		/**
+		 * 現在操作中のテキストフィールドのテキストを、対応するデータソースに書き込みます。
+		 */
+		public function writeToDataSource():void{
+			if (!focusingTextField) return;
+			stage.focus = this;
+			stage.focus = focusingTextField;
 		}
 		
 		/** 
