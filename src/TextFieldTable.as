@@ -48,6 +48,7 @@ package {
 		public function get VisibleRange():Rectangle { return visibleRange };
 		
 		private var editingString:String = "";
+		private var focusingTextField:TextFieldForTable;
 		
 		public function getValue(rowIndex:int , columnIndex:int):String{
 			return String(dataSource[rowIndex][columnPropertyNames[columnIndex]]);
@@ -126,20 +127,26 @@ package {
 			* 	そのため、フォーカスインとフォーカスアウトを入力確定として扱う。
 			*/
 			editingString = e.target.text;
+			focusingTextField = TextFieldForTable(e.target);
 		}
 		
 		private function focusOuted(e:FocusEvent):void {
-			var txFld:TextFieldForTable = TextFieldForTable(e.target);
-			
+			setDataSourceValue(TextFieldForTable(e.target));
+			focusingTextField = null;
+		}
+		
+		private function setDataSourceValue(currentCell:TextFieldForTable):void {
 			//テキストに変更がなければここから下の処理は必要ない。
-			if (txFld.text === editingString) return
+			if (currentCell.text === editingString) return
 			
-			var pointOnDataSource:Point = txFld.PointOfShowingValue;
+			var pointOnDataSource:Point = currentCell.PointOfShowingValue;
 			var propertyName:String = columnPropertyNames[pointOnDataSource.x];
 			
 			var valueSettingEvent:TextTableEvent = new TextTableEvent(TextTableEvent.SOURCE_VALUE_SETTING, true);
-			txFld.dispatchEvent(valueSettingEvent);
+			currentCell.dispatchEvent(valueSettingEvent);
 			
+			//	valueSettingEventが処理されて返ってきた際、呼び出し側によって変数がセットされていた場合はそっちを優先する。
+			//	また、セッティングをこのブロック内で行った場合、以後の代入処理は不要なのでリターンする。
 			if (valueSettingEvent.UserSetted){
 				dataSource[pointOnDataSource.y][ propertyName ] = valueSettingEvent.SettingValue;
 				return
@@ -149,13 +156,13 @@ package {
 			// 先にデータソース側のプロパティの型をチェック。
 			// 以下のような型ならテキストフィールドの内容を型変換して入力する。
 			if (dataSource[pointOnDataSource.y][propertyName] is int){
-				dataSource[pointOnDataSource.y][ propertyName ] = int(txFld.text);
+				dataSource[pointOnDataSource.y][ propertyName ] = int(currentCell.text);
 			}
 			else if (dataSource[pointOnDataSource.y][propertyName] is Boolean){
-				dataSource[pointOnDataSource.y][ propertyName ] = Boolean(txFld.text);
+				dataSource[pointOnDataSource.y][ propertyName ] = Boolean(currentCell.text);
 			}
 			else if (dataSource[pointOnDataSource.y][propertyName] is String){
-				dataSource[pointOnDataSource.y][ propertyName ] = txFld.text;
+				dataSource[pointOnDataSource.y][ propertyName ] = currentCell.text;
 			}
 		}
 		
@@ -196,6 +203,14 @@ package {
 			}
 			visibleRange.y -= moveDistance;
 			writeVisibleRange();
+		}
+		
+		/**
+		 * 現在操作中のテキストフィールドのテキストを、対応するデータソースに書き込みます。
+		 */
+		public function writeToDataSource():void{
+			if (!focusingTextField) return;
+			setDataSourceValue(focusingTextField);
 		}
 		
 		/** 

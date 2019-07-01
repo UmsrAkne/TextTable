@@ -21,11 +21,33 @@ package {
 			scrollUpAndDownTest();
 			textFieldColumnTest();
 			テーブルにデータソースと列名をセットするときに順番が左右しても書き込まれるかテスト();
-			 
+			wirteToDataSourceTest();
+			
 			//テーブルから文字列の書き込みイベントがディスパッチされるかテスト
 			textFieldTableEventDispatchTest();
 			
 			trace(assertionCount + " 回の比較テストが実行されました");
+		}
+		
+		private function wirteToDataSourceTest():void {
+			var sprites:Array = new Array();
+			for (var i:int = 0; i < 40; i++){
+				var sp:Sprite = new Sprite();
+				sp.x = i;
+				sprites.push(sp);
+			}
+			
+			var table:TextFieldTable = new TextFieldTable(10, 10 );
+			table.DataSource = sprites;
+			table.ColumnPropertyNames = new < String > ["x", "y", "z"];
+			addEventListener(Event.ADDED_TO_STAGE , addedToStage);
+			
+			function addedToStage(e:Event):void{
+				stage.focus = table.TextFields[0][0];
+				table.TextFields[0][0].text = "999";
+				table.writeToDataSource();
+				isEqual(sprites[0].x , "999"); //　データソースの値が999になっていれば成功
+			}
 		}
 		
 		private function テーブルにデータソースと列名をセットするときに順番が左右しても書き込まれるかテスト():void{
@@ -35,7 +57,6 @@ package {
 				sp.x = i;
 				sprites.push(sp);
 			}
-			
 			
 			/** ColumnPropertyNames , DataSource　のセットの順番が変わったとしてもエラーにならず
 			 * 	期待されるテキストが書き込まれているか？
