@@ -110,6 +110,8 @@ package {
 				tfld.x = i * tfld.width;
 				tfld.y = 0;
 				tfld.selectable = false; 　//選択可能である必要はない
+				tfld.background = true;
+				tfld.backgroundColor = 0xDDDDDD;
 				columns[i].headerTextField = tfld;
 				addChild(tfld);
 			}
