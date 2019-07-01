@@ -12,6 +12,8 @@ package {
 				this.x = posX
 			}
 			
+			if (headerTextField) headerTextField.x = posX;
+			
 			//列の位置が変更されたら、隣の列が存在るなら、その位置も変更する。
 			if (referenceToNextColumn){
 				referenceToNextColumn.X = this.x + this.width;
@@ -25,6 +27,8 @@ package {
 				t.width = w ;
 				this.width = w;
 			}
+			
+			if (headerTextField) headerTextField.width = w;
 			
 			//次の列への参照は保持しているでの、この列の幅変更に、全列の位置が追従する。
 			if (referenceToNextColumn){
