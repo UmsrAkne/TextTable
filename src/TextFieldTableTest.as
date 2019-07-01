@@ -19,11 +19,50 @@ package {
 			applyToAllTest();
 			dataSourceTest();
 			scrollUpAndDownTest();
+			textFieldColumnTest();
 			
 			//テーブルから文字列の書き込みイベントがディスパッチされるかテスト
 			textFieldTableEventDispatchTest();
 			
 			trace(assertionCount + " 回の比較テストが実行されました");
+		}
+		
+		private function textFieldColumnTest():void {
+			var table:TextFieldTable = new TextFieldTable(10, 10);
+			var sprites:Array = new Array();
+			for (var i:int = 0; i < 40; i++){
+				var sp:Sprite = new Sprite();
+				sp.x = i;
+				sp.y = i * 2;
+				sp.z = i * 3;
+				sprites.push(sp);
+			}
+			
+			addChild(table);
+			table.ColumnPropertyNames = new < String > ["x", "y", "z"];
+			table.DataSource = sprites;
+			
+			table.columns[1].Width = 200;
+			isEqual(table.columns[0].Width ,40);// 列のデフォルト幅は40;
+			isEqual(table.columns[1].X , 40); //　２列目のXは一列目の幅と同じになる。
+			isEqual(table.columns[2].X , 240);// ２列目の幅が変更されて200pxになっているので、期待値は w200 + x40 = x240
+			isEqual(table.columns[3].X , 280);// 以降全列の以上の列の幅変更が適用されているかテスト
+			isEqual(table.columns[4].X , 320);
+			isEqual(table.columns[5].X , 360);
+			isEqual(table.columns[6].X , 400);
+			isEqual(table.columns[7].X , 440);
+			isEqual(table.columns[8].X , 480);
+			isEqual(table.columns[9].X , 520);
+			
+			isEqual(table.columns[1].headerTextField.x , 40);	//	ヘッダーセルの位置情報も全く同じになっているはず。
+			isEqual(table.columns[2].headerTextField.x , 240);
+			isEqual(table.columns[3].headerTextField.x , 280);
+			isEqual(table.columns[4].headerTextField.x , 320);
+			isEqual(table.columns[5].headerTextField.x , 360);
+			isEqual(table.columns[6].headerTextField.x , 400);
+			isEqual(table.columns[7].headerTextField.x , 440);
+			isEqual(table.columns[8].headerTextField.x , 480);
+			isEqual(table.columns[9].headerTextField.x , 520);
 		}
 		
 		private function textFieldTableEventDispatchTest():void {
@@ -59,7 +98,6 @@ package {
 		private function scrollUpAndDownTest():void {
 			
 			var table:TextFieldTable = new TextFieldTable(10, 10);
-			this.addChild(table);
 			var sprites:Array = new Array();
 			for (var i:int = 0; i < 40; i++){
 				var sp:Sprite = new Sprite();
